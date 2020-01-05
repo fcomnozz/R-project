@@ -207,7 +207,7 @@ rfitness <- function(g, c = 0.5,
 
 		} else if(model == "EB"){
 		argseggbox <- paste0("-e ", e,
-		" -E ",E,
+		" -E ",E, " "
 		g, " 2")
 		fl1 <- system2(fl_generate_binary(), args = argseggbox, stdout = TRUE)[-1]
 		fl1 <- matrix(
