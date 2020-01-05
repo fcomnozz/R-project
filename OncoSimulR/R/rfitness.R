@@ -181,8 +181,8 @@ rfitness <- function(g, c = 0.5,
 			
         } else if(model == "Mult") {
 		argsmult <- paste0("-s ", s, " ",
-		"-S ", S, " "
-		"-d " ,d, " ",
+		"-S ", S,
+		" -d " ,d, " ",
 		g, " 2")
 		fl1 <- system2(fl_generate_binary(), args = argsmult, stdout = TRUE)[-1]
 		fl1 <- matrix(
