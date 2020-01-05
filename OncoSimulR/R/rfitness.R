@@ -184,7 +184,7 @@ rfitness <- function(g, c = 0.5,
 		"-S ", S,
 		"-d " ,d,
 		g, " 2")
-		fl1 <- system2(fl_generate_binary(), args = argsnk, stdout = TRUE)[-1]
+		fl1 <- system2(fl_generate_binary(), args = argsmult, stdout = TRUE)[-1]
 		fl1 <- matrix(
         as.numeric(unlist(strsplit(paste(fl1, collapse = " "), " "))),
         ncol = g + 1, byrow = TRUE)
@@ -197,7 +197,7 @@ rfitness <- function(g, c = 0.5,
 		" -I ", I,
 		ifelse(C, " -c ", " "),
 		g, " 2")
-		fl1 <- system2(fl_generate_binary(), args = argsnk, stdout = TRUE)[-1]
+		fl1 <- system2(fl_generate_binary(), args = argsising, stdout = TRUE)[-1]
 		fl1 <- matrix(
         as.numeric(unlist(strsplit(paste(fl1, collapse = " "), " "))),
         ncol = g + 1, byrow = TRUE)
@@ -209,7 +209,7 @@ rfitness <- function(g, c = 0.5,
 		argseggbox <- paste0("-e ", e,
 		" -E ",E,
 		g, " 2")
-		fl1 <- system2(fl_generate_binary(), args = argsnk, stdout = TRUE)[-1]
+		fl1 <- system2(fl_generate_binary(), args = argseggbox, stdout = TRUE)[-1]
 		fl1 <- matrix(
         as.numeric(unlist(strsplit(paste(fl1, collapse = " "), " "))),
         ncol = g + 1, byrow = TRUE)
@@ -235,7 +235,7 @@ rfitness <- function(g, c = 0.5,
 		" -K ", K,
 		ifelse(r, " -r ", " "),
 		g, " 2")
-		fl1 <- system2(fl_generate_binary(), args = argsnk, stdout = TRUE)[-1]
+		fl1 <- system2(fl_generate_binary(), args = argsfull, stdout = TRUE)[-1]
 		fl1 <- matrix(
         as.numeric(unlist(strsplit(paste(fl1, collapse = " "), " "))),
         ncol = g + 1, byrow = TRUE)
