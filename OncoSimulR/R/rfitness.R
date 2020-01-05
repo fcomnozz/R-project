@@ -57,7 +57,7 @@ fl_statistics_binary <- function() get_magellan_binaries("fl_statistics")
 fl_generate_binary <- function() get_magellan_binaries("fl_generate")
 
 
-rfitness <- function(g, c= 0.5,
+rfitness <- function(g, c = 0.5,
                      sd = 1,
                      mu = 1,
                      reference = "random", ## "random", "max", or the vector,
@@ -73,10 +73,35 @@ rfitness <- function(g, c= 0.5,
                      min_accessible_genotypes = NULL,
                      accessible_th = 0,
                      truncate_at_0 = TRUE,
+					 
+					 # NK parameters
                      K = 1,
                      r = TRUE,
-                     model = c("RMF", "NK")) {
-    ## Like Franke et al., 2011 and others of Krug. Very similar to Greene
+					 
+					 # Multiplicative model parameters, default values
+					 s = 0.1,
+					 S = -1,
+					 d = 0, #No permite modificarlo de 0, comprobar
+					 
+					 # Ising model parameters
+					 i = 0,
+					 I = -1,
+					 C = FALSE, #Should be lowercase
+					 
+					 # EggBox model parameters
+					 e = 0,
+					 E = -1,
+					 
+					 # Full model parameters (rest of parameters)
+					 H = -1,
+					 o = 0,
+					 O = -1,
+					 p = 0,
+					 P = -1,
+                     
+					 model = c("RMF", "NK", "Mult","Ising","EB","Full")) {
+   
+   ## Like Franke et al., 2011 and others of Krug. Very similar to Greene
     ## and Crona, 2014. And this allows moving from HoC to purely additive
     ## changing c and sd.
 
@@ -152,7 +177,72 @@ rfitness <- function(g, c= 0.5,
             ## m[] <- m1
             ## rm(m1)
             ## rm(fl1)
-        }
+			
+			
+        } else if(model == "Mult") {
+		argsmult <- paste0("-s ", s,
+		"-S ", S,
+		"-d " ,d,
+		g, " 2")
+		fl1 <- system2(fl_generate_binary(), args = argsnk, stdout = TRUE)[-1]
+		fl1 <- matrix(
+        as.numeric(unlist(strsplit(paste(fl1, collapse = " "), " "))),
+        ncol = g + 1, byrow = TRUE)
+        m1 <- fl1[, 1:g]
+        fi <- fl1[, g + 1]
+  							 
+							 
+		} else if(model == "Ising"){
+		argsising <- paste0("-i ", i,
+		" -I ", I,
+		ifelse(C, " -c ", " "),
+		g, " 2")
+		fl1 <- system2(fl_generate_binary(), args = argsnk, stdout = TRUE)[-1]
+		fl1 <- matrix(
+        as.numeric(unlist(strsplit(paste(fl1, collapse = " "), " "))),
+        ncol = g + 1, byrow = TRUE)
+        m1 <- fl1[, 1:g]
+        fi <- fl1[, g + 1]
+
+
+		} else if(model == "EB"){
+		argseggbox <- paste0("-e ", e,
+		" -E ",E,
+		g, " 2")
+		fl1 <- system2(fl_generate_binary(), args = argsnk, stdout = TRUE)[-1]
+		fl1 <- matrix(
+        as.numeric(unlist(strsplit(paste(fl1, collapse = " "), " "))),
+        ncol = g + 1, byrow = TRUE)
+        m1 <- fl1[, 1:g]
+        fi <- fl1[, g + 1]
+
+
+		} else if(model == "Full"){
+		if(K >= g) stop("It makes no sense to have K >= g")
+		argsfull <- paste0("-H ", H,
+		" -s ", s,
+		" -S ", S,
+		" -d ", d,
+		" -i ", i,
+		" -I ", I, 
+		ifelse(C, " -c ", " "),
+		" -e ", e,
+		" -E ", E,
+		" -o ", o, 
+		" -O ",O, 
+		" -p ",p, 
+		" -P ", P, 
+		" -K ", K,
+		ifelse(r, " -r ", " "),
+		g, " 2")
+		fl1 <- system2(fl_generate_binary(), args = argsnk, stdout = TRUE)[-1]
+		fl1 <- matrix(
+        as.numeric(unlist(strsplit(paste(fl1, collapse = " "), " "))),
+        ncol = g + 1, byrow = TRUE)
+        m1 <- fl1[, 1:g]
+        fi <- fl1[, g + 1]
+		}
+
 
         if(!is.null(scale)) {
             fi <- (fi - min(fi))/(max(fi) - min(fi))
@@ -224,10 +314,6 @@ rfitness <- function(g, c= 0.5,
     class(m) <- c(class(m), "genotype_fitness_matrix")
     return(m)
 }
-
-
-
-
 
 
 
@@ -336,4 +422,3 @@ rfitness <- function(g, c= 0.5,
 ##     class(m) <- c(class(m), "genotype_fitness_matrix")
 ##     return(m)
 ## }
-
