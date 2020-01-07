@@ -14,7 +14,9 @@ rfitness(g, c = 0.5, sd = 1, mu = 1, reference = "random", scale = NULL,
          wt_is_1 = c("subtract", "divide", "force", "no"),
          log = FALSE, min_accessible_genotypes = NULL,
          accessible_th = 0, truncate_at_0 = TRUE,
-         K = 1, r = TRUE, model = c("RMF", "NK"))
+         s = 0.1, S = -1, d = 0, i = 0, I = -1, C = FALSE, e = 0, E = -1,
+         H = -1, o = 0, O = -1, p = 0, P = -1, K = 1, r = TRUE, 
+         model = c("RMF", "NK", "Mult", "Ising", "EB", "Full"))
 }
 
 
@@ -128,8 +130,39 @@ mean \code{mu} and standard deviation \code{sd}).}
 \item{r}{For the NK model, whether interacting loci are chosen at random
   (\code{r = TRUE}) or are neighbors (\code{r = FALSE}).}
 
-\item{model}{One of "RMF" (default), for Rough Mount Fuji, or "NK", for
-  Kauffman's NK model.}
+\item{s}{For the Mult model; s is the mean fitness selection 
+coefficient per locus (default 0.1).}
+
+\item{S}{For the Mult model; S is the stdev for fitness for each 
+locus (default -1).}
+
+\item{d}{For the Mult model; can set a diminishing (negative) or 
+increasing (positive) return as you approach the peak (default 0).}
+
+\item{i}{For the Ising model; mean cost for incompatibility (default 0).}
+
+\item{I}{For the Ising model; stdev cost for incompatibility (default -1).}
+
+\item{C}{For the Ising model; last interacts with first (loci are arranged 
+on a circle) (default FALSE).}
+
+\item{e}{For the EB model; every other genotype is +/- e (default 0).}
+
+\item{E}{For the EB model; add noise on the mean effect for eggbox (default -1).}
+
+\item{o}{For the Full model; optimum to target (default 0).}
+
+\item{O}{For the Full model; the spread around the optimal point, the larger 
+the less selection for optimum (default -1).}
+
+\item{p}{For the Full model; the mean production value for each non 0 
+allele (default 0).}
+
+\item{P}{For the Full model; the associated stdev (default -1).}
+
+\item{model}{One of "RMF" (default), for Rough Mount Fuji, "NK", for
+  Kauffman's NK model, "Mult" for multiplicative model, "Ising", for Ising model, "EB",
+  for Eggbox model, and "Full", for Full model.}
 } 
 
 
