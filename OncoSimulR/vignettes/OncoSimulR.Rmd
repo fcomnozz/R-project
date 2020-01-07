@@ -8455,6 +8455,53 @@ plot(rnk)
 oncoSimulIndiv(allFitnessEffects(genotFitness = rnk))
 ```
 
+## Random fitness landscapes from Multiplicative model {#multmodel}
+
+A multiplicative model, giving each allele a differentiated fitness 
+contribution, by calling MAGELLAN in `fl_statistics` [@brouillet_magellan:_2015].
+
+```{r multiplex}
+rmult1 <- rfitness(4, s=2, d=1, model = "Mult")
+Magellan_stats(rmult1)
+rmult2 <- rfitness(6, s=3, d=0, model = "Mult")
+Magellan_stats(rmult2)
+```
+
+## Random fitness landscapes from Ising model {#isingmodel}
+You can also use the Ising model [eg., @ferreti_measuring_2016; @brouillet_magellan:_2015], 
+all loci are arranged sequentially, and each locus interacts with its physical neighbors. 
+The last and the first loci will interact only if 'circular' is set. For each pair of interacting loci, there is an associated 
+cost if both alleles are not identical (and therefore 'compatible'). We call the fuction `fl_generate` from MAGELLAN` [@brouillet_magellan:_2015].
+
+```{r ISex1}
+ris ← rfitness(5, I = 2, model = “Ising”)
+plot(ris)
+oncoSimulIndiv(allFitnessEffects(genotFitness = ris))
+```
+
+## Random fitness landscapes from Eggbox model {#ebmodel}
+
+The Eggbox model is also available [e.g., @ferretti_measuring_2016;
+@brouillet_magellan:_2015]. Also using the function `fl_generate` from
+MAGELLAN [@brouillet_magellan:_2015].
+
+
+```{r EBex1}
+reb <- rfitness(5, E=1, e=1, model = "EB")
+plot(reb)
+oncoSimulIndiv(allFitnessEffects(genotFitness = reb))
+```
+
+## Random fitness landscapes from the Full model {#fullmodel}
+
+With the Full model [e.g., @ferreti_measuring_2016; @brouillet_magellan:_2015], the fitness is computed with different parts of other models depending on the choosen parameters. We call the fuction `fl_generate` from MAGELLAN` [@brouillet_magellan:_2015].
+
+```{r FMex1}
+rfull <- rfitness(5, model = "Full", O = 2, i = 3, e = 2)
+plot(rfull)
+oncoSimulIndiv(allFitnessEffects(genotFitness = rfull))
+```
+
 ## Epistasis and fitness landscape statistics {#epistats}
 
 We can call MAGELLAN's [@brouillet_magellan:_2015] `fl_statistics` to
