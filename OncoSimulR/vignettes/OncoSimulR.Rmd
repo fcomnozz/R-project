@@ -8474,7 +8474,7 @@ The last and the first loci will interact only if 'circular' is set. For each pa
 cost if both alleles are not identical (and therefore 'compatible'). We call the fuction `fl_generate` from MAGELLAN` [@brouillet_magellan:_2015].
 
 ```{r ISex1}
-ris ← rfitness(5, I = 2, model = “Ising”)
+ris <- rfitness(5, I = 2, model = “Ising”)
 plot(ris)
 oncoSimulIndiv(allFitnessEffects(genotFitness = ris))
 ```
