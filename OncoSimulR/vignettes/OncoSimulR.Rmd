@@ -8476,7 +8476,7 @@ interacting loci, there is an associated cost if both alleles are not identical
 We call the fuction `fl_generate` from MAGELLAN [@brouillet_magellan:_2015].
 
 ```{r ISex1}
-ris <- rfitness(5, I = 2, model = “Ising”)
+ris <- rfitness(5, I = 2, model = "Ising")
 plot(ris)
 oncoSimulIndiv(allFitnessEffects(genotFitness = ris))
 ```
