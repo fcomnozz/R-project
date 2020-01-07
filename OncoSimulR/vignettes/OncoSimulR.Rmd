@@ -8468,7 +8468,7 @@ Magellan_stats(rmult2)
 ```
 
 ## Random fitness landscapes from Ising model {#isingmodel}
-You can also use the Ising model [eg., @ferreti_measuring_2016; @brouillet_magellan:_2015], 
+You can also use the Ising model [eg., @ferretti_measuring_2016; @brouillet_magellan:_2015], 
 all loci are arranged sequentially, and each locus interacts with its physical neighbors.
 The last and the first loci will interact only if 'circular' is set. For each pair of 
 interacting loci, there is an associated cost if both alleles are not identical 
@@ -8476,7 +8476,7 @@ interacting loci, there is an associated cost if both alleles are not identical
 We call the fuction `fl_generate` from MAGELLAN [@brouillet_magellan:_2015].
 
 ```{r ISex1}
-ris <- rfitness(5, I = 2, model = "Ising")
+ris <- rfitness(5, I = 2, i = 1, model = "Ising")
 plot(ris)
 oncoSimulIndiv(allFitnessEffects(genotFitness = ris))
 ```
@@ -8496,7 +8496,7 @@ oncoSimulIndiv(allFitnessEffects(genotFitness = reb))
 
 ## Random fitness landscapes from the Full model {#fullmodel}
 
-With the Full model [e.g., @ferreti_measuring_2016; @brouillet_magellan:_2015], 
+With the Full model [e.g., @ferretti_measuring_2016; @brouillet_magellan:_2015], 
 the fitness is computed with different parts of other models depending on the 
 choosen parameters. We call the fuction `fl_generate` from MAGELLAN [@brouillet_magellan:_2015].
 
