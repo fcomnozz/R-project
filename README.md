@@ -21,7 +21,8 @@ Bayesian Networks, and other cancer progression models; plotting and
 sampling from single or multiple realizations of the simulations,
 including single-cell sampling; plotting the parent-child relationships of
 the clones; generating random fitness landscapes (Rough Mount Fuji, House
-of Cards, and additive models, and NK model) and plotting them.
+of Cards, and additive models, NK model, Ising model, Eggbox model, 
+multiplicative model, and Full model) and plotting them.
 
 
 
