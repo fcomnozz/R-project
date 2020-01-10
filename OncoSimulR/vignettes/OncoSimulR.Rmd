@@ -8461,10 +8461,9 @@ A multiplicative model, giving each allele a differentiated fitness
 contribution, by calling MAGELLAN in `fl_statistics` .
 
 ```{r multiplex}
-rmult1 <- rfitness(4, s=2, d=1, model = "Mult")
-Magellan_stats(rmult1)
-rmult2 <- rfitness(6, s=3, d=0, model = "Mult")
-Magellan_stats(rmult2)
+rmult <- rfitness(4, s=2, d=1, model = "Mult")
+plot(rmult)
+Magellan_stats(rmult)
 ```
 
 ## Random fitness landscapes from Ising model {#isingmodel}
